@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Subject {
+    double gradePoint;
+    double creditHours;
+};
+
+double calculateCGPA(vector<Subject> subjects) {
+    double totalGradePoints = 0;
+    double totalCreditHours = 0;
+
+    for(const auto& subject : subjects) {
+        totalGradePoints += subject.gradePoint * subject.creditHours;
+        totalCreditHours += subject.creditHours;
+    }
+
+    return totalGradePoints / totalCreditHours;
+}
+
+int main() {
+    int numSubjects;
+    cout << "Enter the number of subjects: ";
+    cin >> numSubjects;
+
+    vector<Subject> subjects(numSubjects);
+
+    for(int i = 0; i < numSubjects; ++i) {
+        cout << "Enter grade point for subject " << i + 1 << ": ";
+        cin >> subjects[i].gradePoint;
+        cout << "Enter credit hours for subject " << i + 1 << ": ";
+        cin >> subjects[i].creditHours;
+    }
+
+    double cgpa = calculateCGPA(subjects);
+
+    cout << "Your CGPA is: " << cgpa << endl;
+
+    return 0;
+}
